@@ -27,11 +27,18 @@
       "src/js/main/search.ts",
       "src/js/main/autocomplete.ts",
       "src/js/main/results.ts",
+      "src/js/main/ai.ts",
       "src/js/main/preferences.ts"
     ]
   },
+  "src/js/main/ai.ts": {
+    "file": "chunk/Cb-uxSlc.min.js",
+    "name": "ai",
+    "src": "src/js/main/ai.ts",
+    "isDynamicEntry": true
+  },
   "src/js/main/autocomplete.ts": {
-    "file": "chunk/Bs-FMxfE.min.js",
+    "file": "chunk/CGOf9o28.min.js",
     "name": "autocomplete",
     "src": "src/js/main/autocomplete.ts",
     "isDynamicEntry": true,
