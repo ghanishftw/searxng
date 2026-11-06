@@ -4,5 +4,6 @@
 <div class="index">
     <div class="title"><h1>SearXNG</h1></div>
     {% include 'simple/simple_search.html' %}
+    <div class="index_buttons"><button type="submit" form="search">{{ _('Search') }}</button><a href="{{ url_for('preferences') }}">{{ _('Preferences') }}</a></div>
 </div>
 {% endblock %}

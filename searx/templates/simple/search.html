@@ -12,13 +12,17 @@
         <div class="autocomplete hide_if_nojs"><ul></ul></div>
       </div>
     </div>
-    {% set display_tooltip = true %}
-    {% include 'simple/categories.html' %}
-  </div>
-  <div class="search_filters">
-    {% include 'simple/filters/languages.html' %}
-    {% include 'simple/filters/time_range.html' %}
-    {% include 'simple/filters/safesearch.html' %}
+    <div class="g_tabs">
+      {% set display_tooltip = true %}
+      {% include 'simple/categories.html' %}
+      <details class="g_tools" {%- if time_range %} open{% endif %}><summary>{{ _('Tools') }}</summary>
+        <div class="search_filters">
+          {% include 'simple/filters/languages.html' %}
+          {% include 'simple/filters/time_range.html' %}
+          {% include 'simple/filters/safesearch.html' %}
+        </div>
+      </details>
+    </div>
   </div>
   <input type="hidden" name="theme" value="{{ theme }}" >
   {% if timeout_limit %}<input type="hidden" name="timeout_limit" value="{{ timeout_limit|e }}" >{% endif %}
