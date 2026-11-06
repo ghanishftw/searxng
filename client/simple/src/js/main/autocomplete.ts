@@ -5,9 +5,10 @@ import { assertElement } from "../util/assertElement.ts";
 
 const fetchResults = async (qInput: HTMLInputElement, query: string): Promise<void> => {
   try {
-    const res = await http("GET", `./autocompleter?q=${query}`);
+    const res = await http("GET", `./autocompleter?q=${encodeURIComponent(query)}`);
 
     const results = await res.json();
+    if (query !== qInput.value) return;
 
     const autocomplete = document.querySelector<HTMLElement>(".autocomplete");
     assertElement(autocomplete);
@@ -60,13 +61,16 @@ listen("input", qInput, () => {
   const query = qInput.value;
   const minLength = settings.autocomplete_min ?? 2;
 
-  if (query.length < minLength) return;
+  if (query.length < minLength) {
+    document.querySelector(".autocomplete")?.classList.remove("open");
+    return;
+  }
 
   timeoutId = window.setTimeout(async () => {
     if (query === qInput.value) {
       await fetchResults(qInput, query);
     }
-  }, 300);
+  }, 100);
 });
 
 const autocomplete: HTMLElement | null = document.querySelector<HTMLElement>(".autocomplete");
