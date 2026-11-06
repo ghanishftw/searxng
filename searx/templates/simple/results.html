@@ -59,6 +59,12 @@
     {%- endif -%}
 
     <div id="urls" role="main">
+    {% if preferences.get_value('ai_provider') and results %}
+    <section id="ai_overview" class="loading"><h2>{{ icon_small('sparkles') }} {{ _('AI Overview') }}</h2><p></p></section>
+    {% elif infoboxes and infoboxes[0].content %}
+    <section id="ai_overview" class="wiki"><h2>{{ icon_small('sparkles') }} {{ infoboxes[0].infobox }}</h2><p>{{ infoboxes[0].content|safe }}</p>
+      {% if infoboxes[0].id %}<a class="source" href="{{ infoboxes[0].id }}">{{ infoboxes[0].engine|capitalize }}</a>{% endif %}</section>
+    {% endif %}
     {% for result in results %}
         {% if result.open_group and not only_template %}<div class="template_group_{{ result['template']|replace('.html', '') }}">{% endif %}
         {% set index = loop.index %}

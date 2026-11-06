@@ -52,6 +52,7 @@ ready(
   () => {
     void import("./main/keyboard.ts");
     void import("./main/results.ts");
+    void import("./main/ai.ts");
     void import("./main/search.ts");
 
     if (settings.autocomplete) {

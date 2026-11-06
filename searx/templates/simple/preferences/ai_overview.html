@@ -1,0 +1,21 @@
+<fieldset>{{- '' -}}
+  <legend id="pref_ai_provider">{{ _('AI overview') }}</legend>{{- '' -}}
+  <p class="value">{{- '' -}}
+    <select name="ai_provider" aria-labelledby="pref_ai_provider">{{- '' -}}
+      {%- for value, label in [('', _('Off')), ('google', 'Google Gemini'), ('openai', 'OpenAI GPT'), ('claude', 'Anthropic Claude'), ('opencode', 'OpenCode Zen'), ('opencode_go', 'OpenCode Go')] -%}
+        <option value="{{ value }}" {%- if value == preferences.get_value('ai_provider') %} selected="selected"{%- endif -%}>{{ label }}</option>
+      {%- endfor -%}
+    </select>{{- '' -}}
+  </p>{{- '' -}}
+  <div class="description">{{ _('Show an AI generated overview above the results.') }}</div>{{- '' -}}
+</fieldset>{{- '' -}}
+<fieldset>{{- '' -}}
+  <legend id="pref_ai_model">{{ _('Model') }}</legend>{{- '' -}}
+  <p class="value"><input type="text" name="ai_model" aria-labelledby="pref_ai_model" value="{{ preferences.get_value('ai_model') }}" placeholder="gemini-2.5-flash / gpt-5-mini / claude-haiku-5-5"></p>{{- '' -}}
+  <div class="description">{{ _('Leave empty for the default model (OpenCode Go: hy3; required for OpenCode Zen).') }}</div>{{- '' -}}
+</fieldset>{{- '' -}}
+<fieldset>{{- '' -}}
+  <legend id="pref_ai_key">{{ _('API key') }}</legend>{{- '' -}}
+  <p class="value"><input type="password" name="ai_key" aria-labelledby="pref_ai_key" value="{{ preferences.get_value('ai_key') }}" autocomplete="off"></p>{{- '' -}}
+  <div class="description">{{ _('Stored only in your browser cookie and sent to the provider.') }}</div>{{- '' -}}
+</fieldset>{{- '' -}}

@@ -17,7 +17,7 @@ import babel.core
 
 import searx.plugins
 
-from searx import get_setting, settings, autocomplete, favicons
+from searx import get_setting, settings, autocomplete, favicons, ai_overview
 from searx.enginelib import Engine
 from searx.engines import DEFAULT_CATEGORY
 from searx.extended_types import SXNG_Request
@@ -487,6 +487,9 @@ class Preferences:
                 get_setting("ui.url_formatting"),
                 choices=["pretty", "full", "host"],
             ),
+            'ai_provider': EnumStringSetting("", choices=["", *ai_overview.PROVIDERS]),
+            'ai_model': StringSetting(""),
+            'ai_key': StringSetting(""),
         }
 
         self.engines = EnginesSetting('engines', engines=engines.values())
@@ -498,7 +501,7 @@ class Preferences:
         """Return preferences as URL parameters"""
         settings_kv = {}
         for k, v in self.key_value_settings.items():
-            if v.locked:
+            if v.locked or k == 'ai_key':
                 continue
             if isinstance(v, MultipleChoiceSetting):
                 settings_kv[k] = ','.join(v.get_value())

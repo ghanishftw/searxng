@@ -230,6 +230,12 @@
     {{- plugin_preferences('privacy') -}}
     {{- tab_footer() -}}
 
+    {# tab: ai #}
+
+    {{- tab_header('maintab', 'ai', _('AI')) -}}
+    {%- include 'simple/preferences/ai_overview.html' -%}
+    {{- tab_footer() -}}
+
     {# tab: enignes #}
 
     {{- tab_header('maintab', 'engines', _('Engines')) -}}

@@ -112,6 +112,7 @@ from searx.locales import (
 
 # renaming names from searx imports ...
 from searx.autocomplete import search_autocomplete, backends as autocomplete_backends
+from searx import ai_overview
 from searx import favicons
 
 from searx.valkeydb import initialize as valkey_initialize
@@ -876,6 +877,22 @@ def autocompleter():
         mimetype = 'application/x-suggestions+json'
 
     return Response(suggestions, mimetype=mimetype)
+
+
+@app.route('/ai_overview', methods=['POST'])
+def ai_overview_view():
+    pref = sxng_request.preferences
+    args = [pref.get_value(k) for k in ('ai_provider', 'ai_model', 'ai_key')]
+    args += [sxng_request.form.get('q', ''), json.loads(sxng_request.form.get('results', '[]'))]
+
+    def generate():
+        try:
+            yield from ai_overview.overview(*args)
+        except Exception as e:  # pylint: disable=broad-except
+            logger.warning('ai overview: %r', e)
+            yield f'\u26a0 {str(e) or repr(e)}'
+
+    return Response(generate(), mimetype='text/plain')
 
 
 @app.route('/preferences', methods=['GET', 'POST'])

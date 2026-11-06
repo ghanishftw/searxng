@@ -37,6 +37,7 @@ const simple_icons: IconSet[] = [
     base: resolve(HERE, "node_modules/ionicons/dist/svg"),
     set: {
       alert: "alert-outline.svg",
+      sparkles: "sparkles.svg",
       appstore: "apps-outline.svg",
       book: "book-outline.svg",
       camera: "camera-outline.svg",
